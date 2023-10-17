@@ -1,6 +1,13 @@
 trigger:
 - main
 
+resources:
+  repositories:
+  - repository: arheanja/cicd_terra
+    type: github
+    name: arheanja/cicd_terra
+    ref: prueba2
+
 - task: TerraformInstaller@1
   inputs:
     terraformVersion: '1.2.0'
