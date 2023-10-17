@@ -15,6 +15,8 @@ variables:
 
 jobs:
 - job: DeployInfrastructure
+  strategy:
+    maxParallel: 1
   steps:
   - task: UsePythonVersion@0
     inputs:
