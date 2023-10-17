@@ -1,0 +1,24 @@
+- task: TerraformInstaller@1
+  inputs:
+    terraformVersion: '1.2.0'
+- task: TerraformTaskV4@4
+  inputs:
+    provider: 'aws'
+    command: 'init'
+    backendServiceAWS: 'AWS for terra'
+    backendAWSBucketName: 'tfstate-arheanja'
+    backendAWSKey: 'tf//terra-lab/arheanja2009/terraform.tfstate'
+- task: TerraformTaskV4@4
+  inputs:
+    provider: 'aws'
+    command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/terra-lab/arheanja2009'
+    commandOptions: '-var"region=$(region)" -var"access_key$(access_key)" -var"secret_key=$(secret_key)" -out demo.tfplan'
+    environmentServiceNameAWS: 'AWS for terra'
+- task: TerraformTaskV4@4
+  inputs:
+    provider: 'aws'
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/terra-lab/arheanja2009'
+    commandOptions: '"demo.tfplan"'
+    environmentServiceNameAWS: 'AWS for terra'
